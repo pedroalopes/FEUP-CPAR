@@ -42,3 +42,5 @@ go run matrixprod.go 4000 4000 1024 8 2 | tee -a go-output.txt
 go run matrixprod.go 6000 6000 1024 8 2 | tee -a go-output.txt
 go run matrixprod.go 8000 8000 1024 8 2 | tee -a go-output.txt
 go run matrixprod.go 10000 10000 1024 8 2 | tee -a go-output.txt
+
+date | tee -a go-output.txt
