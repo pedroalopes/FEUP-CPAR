@@ -1,4 +1,5 @@
 ter mar  3 14:02:07 WET 2020
+jvieira-Desktop
 Using lin = 600 , col = 600 , block = 0 and threads = 0
 Time(OnMult):  528.3993ms
 Using lin = 1000 , col = 1000 , block = 0 and threads = 0
