@@ -1,5 +1,6 @@
 #!/bin/bash
 date | tee -a go-output.txt
+hostname | tee -a go-output.txt
 # 1 
 go run matrixprod.go 600 600 0 0 0 | tee -a go-output.txt
 go run matrixprod.go 1000 1000 0 0 0 | tee -a go-output.txt
