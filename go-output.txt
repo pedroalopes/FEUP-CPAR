@@ -1,0 +1,71 @@
+ter mar  3 14:02:07 WET 2020
+jvieira-Desktop
+Using lin = 600 , col = 600 , block = 0 and threads = 0
+Time(OnMult):  528.3993ms
+Using lin = 1000 , col = 1000 , block = 0 and threads = 0
+Time(OnMult):  4.682169915s
+Using lin = 1400 , col = 1400 , block = 0 and threads = 0
+Time(OnMult):  8.997961354s
+Using lin = 1800 , col = 1800 , block = 0 and threads = 0
+Time(OnMult):  19.074109934s
+Using lin = 2200 , col = 2200 , block = 0 and threads = 0
+Time(OnMult):  35.569316162s
+Using lin = 2600 , col = 2600 , block = 0 and threads = 0
+Time(OnMult):  58.790151257s
+Using lin = 3000 , col = 3000 , block = 0 and threads = 0
+Time(OnMult):  1m30.484712075s
+Using lin = 600 , col = 600 , block = 0 and threads = 0
+Time(OnMultLine):  295.427168ms
+Using lin = 1000 , col = 1000 , block = 0 and threads = 0
+Time(OnMultLine):  1.453498855s
+Using lin = 1400 , col = 1400 , block = 0 and threads = 0
+Time(OnMultLine):  3.936535129s
+Using lin = 1800 , col = 1800 , block = 0 and threads = 0
+Time(OnMultLine):  8.305196539s
+Using lin = 2200 , col = 2200 , block = 0 and threads = 0
+Time(OnMultLine):  15.176970652s
+Using lin = 2600 , col = 2600 , block = 0 and threads = 0
+Time(OnMultLine):  25.275172419s
+Using lin = 3000 , col = 3000 , block = 0 and threads = 0
+Time(OnMultLine):  38.600967813s
+Using lin = 4000 , col = 4000 , block = 0 and threads = 0
+Time(OnMultLine):  1m30.592307283s
+Using lin = 6000 , col = 6000 , block = 0 and threads = 0
+Time(OnMultLine):  5m3.547328592s
+Using lin = 8000 , col = 8000 , block = 0 and threads = 0
+Time(OnMultLine):  12m2.36876806s
+Using lin = 10000 , col = 10000 , block = 0 and threads = 0
+Time(OnMultLine):  23m32.121283827s
+Using lin = 4000 , col = 4000 , block = 128 and threads = 8
+Time(OnMultLineBlock):  39.031357003s
+Using lin = 6000 , col = 6000 , block = 128 and threads = 8
+Time(OnMultLineBlock):  3m12.16127913s
+Using lin = 8000 , col = 8000 , block = 128 and threads = 8
+Time(OnMultLineBlock):  7m37.118905413s
+Using lin = 10000 , col = 10000 , block = 128 and threads = 8
+Time(OnMultLineBlock):  14m56.981717896s
+Using lin = 4000 , col = 4000 , block = 256 and threads = 8
+Time(OnMultLineBlock):  39.063745206s
+Using lin = 6000 , col = 6000 , block = 256 and threads = 8
+Time(OnMultLineBlock):  2m11.356290888s
+Using lin = 8000 , col = 8000 , block = 256 and threads = 8
+Time(OnMultLineBlock):  7m37.462651394s
+Using lin = 10000 , col = 10000 , block = 256 and threads = 8
+Time(OnMultLineBlock):  14m52.036999244s
+Using lin = 4000 , col = 4000 , block = 512 and threads = 8
+Time(OnMultLineBlock):  39.006928994s
+Using lin = 6000 , col = 6000 , block = 512 and threads = 8
+Time(OnMultLineBlock):  2m13.952629633s
+Using lin = 8000 , col = 8000 , block = 512 and threads = 8
+Time(OnMultLineBlock):  7m38.965333536s
+Using lin = 10000 , col = 10000 , block = 512 and threads = 8
+Time(OnMultLineBlock):  14m52.513004462s
+Using lin = 4000 , col = 4000 , block = 1024 and threads = 8
+Time(OnMultLineBlock):  57.058299783s
+Using lin = 6000 , col = 6000 , block = 1024 and threads = 8
+Time(OnMultLineBlock):  3m12.566361373s
+Using lin = 8000 , col = 8000 , block = 1024 and threads = 8
+Time(OnMultLineBlock):  7m37.355119561s
+Using lin = 10000 , col = 10000 , block = 1024 and threads = 8
+Time(OnMultLineBlock):  14m56.794619797s
+ter mar  3 16:33:32 WET 2020

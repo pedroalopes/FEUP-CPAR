@@ -168,21 +168,34 @@ func main () {
   col := 10
   block := 2
   threads := 8
-  if len(os.Args) != 5 {
+  opt := 3
+  if len(os.Args) != 6 {
     fmt.Println("No lin, col, block size or threads values provided, defaulted to", lin, col, block, threads, ", respectively")
   } else {
     l,_ := strconv.Atoi(os.Args[1])
     c,_ := strconv.Atoi(os.Args[2])
     b,_ := strconv.Atoi(os.Args[3])
     t,_ := strconv.Atoi(os.Args[4])
+    o,_ := strconv.Atoi(os.Args[5])
     lin = l
     col = c
     block = b
     threads = t
+    opt = o
   }
-  fmt.Println("Using lin =", lin , ", col =", col, "and block =", block)
-  OnMult(lin,col)
-  OnMultLine(lin,col)
-  OnMultLineBlock(lin,col,block, threads)
+  fmt.Println("Using lin =", lin , ", col =", col, ", block =", block, "and threads =", threads)
+  switch opt {
+    case 0:
+      OnMult(lin,col)
+    case 1:
+      OnMultLine(lin,col)
+    case 2:
+      OnMultLineBlock(lin,col,block, threads)
+    default:
+      OnMult(lin,col)
+      OnMultLine(lin,col)
+      OnMultLineBlock(lin,col,block, threads)
+  }
+
 }
 
