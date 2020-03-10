@@ -52,13 +52,13 @@ void OnMult(int m_ar, int m_br)
 	sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
 	cout << st;
 
-	cout << "Result matrix: " << endl;
-	for (i = 0; i < 1; i++)
-	{
-		for (j = 0; j < min(10, m_br); j++)
-			cout << phc[j] << " ";
-	}
-	cout << endl;
+	// cout << "Result matrix: " << endl;
+	// for (i = 0; i < m_ar; i++)
+	// {
+	// 	for (j = 0; j < min(10, m_br); j++)
+	// 		cout << phc[j] << " ";
+	// }
+	// cout << endl;
 
 	free(pha);
 	free(phb);
@@ -79,6 +79,12 @@ void OnMultLine(int m_ar, int m_br)
 	pha = (double *)malloc((m_ar * m_ar) * sizeof(double));
 	phb = (double *)malloc((m_ar * m_ar) * sizeof(double));
 	phc = (double *)malloc((m_ar * m_ar) * sizeof(double));
+
+	for (i = 0; i < m_ar; i++)
+	{
+		for (j = 0; j < min(10, m_br); j++)
+			phc[j] = 0;
+	}
 
 	for (i = 0; i < m_ar; i++)
 		for (j = 0; j < m_ar; j++)
@@ -105,13 +111,13 @@ void OnMultLine(int m_ar, int m_br)
 	sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
 	cout << st;
 
-	cout << "Result matrix: " << endl;
-	for (i = 0; i < 1; i++)
-	{
-		for (j = 0; j < min(10, m_br); j++)
-			cout << phc[j] << " ";
-	}
-	cout << endl;
+	// cout << "Result matrix: " << endl;
+	// for (i = 0; i < m_ar; i++)
+	// {
+	// 	for (j = 0; j < min(10, m_br); j++)
+	// 		cout << phc[j] << " ";
+	// }
+	// cout << endl;
 
 	free(pha);
 	free(phb);
@@ -126,7 +132,6 @@ void onMultLineBlockProd(int m_ar, int m_br, int b, int t, int tn, double *pha, 
 
 	for (blockNo = tn; blockNo < limBlocks; blockNo += t)
 	{
-		cout << "DEBUG || Thread No.: " << tn << " Block No.: " << blockNo << endl;;
 		int iIni = blockNo * b / m_ar;
 		int jIni = blockNo * b % m_ar;
 		int start = iIni * m_ar + jIni;
@@ -135,7 +140,7 @@ void onMultLineBlockProd(int m_ar, int m_br, int b, int t, int tn, double *pha, 
 		if (lim >= sizeof(pha))
 			lim = sizeof(pha);
 
-		cout << "DEBUG || Block No.: " << blockNo << " Index: " << start << " " << lim << " " << iIni << " " << jIni << endl;
+		// cout << "DEBUG || Thread No.: " << tn << " Block No.: " << blockNo << " Index: " << start << " " << lim << " " << iIni << " " << jIni << endl;
 		for (int index = start; index < lim; index++)
 		{
 			int i = index / m_ar;
@@ -164,6 +169,12 @@ void onMultLineBlock(int m_ar, int m_br, int b, int t)
 	phc = (double *)malloc((m_ar * m_ar) * sizeof(double));
 
 	for (i = 0; i < m_ar; i++)
+	{
+		for (j = 0; j < min(10, m_br); j++)
+			phc[j] = 0;
+	}
+
+	for (i = 0; i < m_ar; i++)
 		for (j = 0; j < m_ar; j++)
 			pha[i * m_ar + j] = (double)1.0;
 
@@ -183,13 +194,15 @@ void onMultLineBlock(int m_ar, int m_br, int b, int t)
 	sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
 	cout << st;
 
-	cout << "Result matrix: " << endl;
-	for (i = 0; i < 1; i++)
-	{
-		for (j = 0; j < min(10, m_br); j++)
-			cout << phc[j] << " ";
-	}
-	cout << endl;
+	// cout << "Result matrix: " << endl;
+	// for (i = 0; i < m_br; i++)
+	// {
+	// 	for (j = 0; j < min(10, m_br); j++)
+	// 		cout << phc[j] << " ";
+
+	// 	cout << endl;
+	// }
+	// cout << endl;
 
 	free(pha);
 	free(phb);
@@ -257,49 +270,89 @@ int main(int argc, char *argv[])
 		cout << "ERRO: PAPI_L2_DCM" << endl;
 
 	op = 1;
-	do
-	{
-		cout << endl
-				 << "1. Multiplication" << endl;
-		cout << "2. Line Multiplication" << endl;
-		cout << "3. Block Multiplication" << endl;
-		cout << "Selection?: ";
-		cin >> op;
-		if (op == 0)
-			break;
-		printf("Dimensions: lins cols ? ");
-		cin >> lin >> col;
 
-		// Start counting
-		ret = PAPI_start(EventSet);
-		if (ret != PAPI_OK)
-			cout << "ERRO: Start PAPI" << endl;
-
-		switch (op)
+	if (*argv[1] == '0')
+		do
 		{
+			cout << endl
+					 << "1. Multiplication" << endl;
+			cout << "2. Line Multiplication" << endl;
+			cout << "3. Block Multiplication" << endl;
+			cout << "Selection?: ";
+			cin >> op;
+			if (op == 0)
+				break;
+			printf("Dimensions: lins cols ? ");
+			cin >> lin >> col;
+
+			// Start counting
+			ret = PAPI_start(EventSet);
+			if (ret != PAPI_OK)
+				cout << "ERRO: Start PAPI" << endl;
+
+			switch (op)
+			{
+			case 1:
+				OnMult(lin, col);
+				break;
+			case 2:
+				OnMultLine(lin, col);
+				break;
+			case 3:
+				cout << "Variables: block_size thread_no ? ";
+				cin >> block_size >> thread_no;
+				onMultLineBlock(lin, col, block_size, thread_no);
+			}
+
+			ret = PAPI_stop(EventSet, values);
+			if (ret != PAPI_OK)
+				cout << "ERRO: Stop PAPI" << endl;
+			printf("L1 DCM: %lld \n", values[0]);
+			printf("L2 DCM: %lld \n", values[1]);
+
+			ret = PAPI_reset(EventSet);
+			if (ret != PAPI_OK)
+				std::cout << "FAIL reset" << endl;
+
+		} while (op != 0);
+	else
+	{
+		int iterations = 0;
+		int prod_type = atoi(argv[2]);
+		int line_start = atoi(argv[3]);
+		int col_start = atoi(argv[4]);
+		int line_end = atoi(argv[5]);
+		int col_end = atoi(argv[6]);
+		int increment = atoi(argv[7]);
+
+		switch (prod_type)
+		{
+
 		case 1:
-			OnMult(lin, col);
+			iterations = (line_end - line_start) / increment;
+
+			for (int i = 0; i <= iterations; i++)
+			{
+				OnMult(line_start + i * increment, col_start + i * increment);
+			}
 			break;
 		case 2:
-			OnMultLine(lin, col);
+			iterations = line_end - line_start / increment;
+			for (int i = 0; i <= iterations; i++)
+			{
+				OnMultLine(line_start + i * increment, col_start + i * increment);
+			}
 			break;
 		case 3:
-			cout << "Variables: block_size thread_no ? ";
-			cin >> block_size >> thread_no;
-			onMultLineBlock(lin, col, block_size, thread_no);
+			int block_no = *argv[8];
+			int thread_no = *argv[9];
+			iterations = line_end - line_start / increment;
+			for (int i = 0; i <= iterations; i++)
+			{
+				onMultLineBlock(line_start + i * increment, col_start + i * increment, block_no, thread_no);
+			}
 		}
-
-		ret = PAPI_stop(EventSet, values);
-		if (ret != PAPI_OK)
-			cout << "ERRO: Stop PAPI" << endl;
-		printf("L1 DCM: %lld \n", values[0]);
-		printf("L2 DCM: %lld \n", values[1]);
-
-		ret = PAPI_reset(EventSet);
-		if (ret != PAPI_OK)
-			std::cout << "FAIL reset" << endl;
-
-	} while (op != 0);
+	}
 
 	ret = PAPI_remove_event(EventSet, PAPI_L1_DCM);
 	if (ret != PAPI_OK)
