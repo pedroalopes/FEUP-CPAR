@@ -238,8 +238,8 @@ void init_papi()
 		handle_error(retval);
 
 	std::cout << "PAPI Version Number: MAJOR: " << PAPI_VERSION_MAJOR(retval)
-						<< " MINOR: " << PAPI_VERSION_MINOR(retval)
-						<< " REVISION: " << PAPI_VERSION_REVISION(retval) << "\n";
+			  << " MINOR: " << PAPI_VERSION_MINOR(retval)
+			  << " REVISION: " << PAPI_VERSION_REVISION(retval) << "\n";
 }
 
 int main(int argc, char *argv[])
@@ -275,7 +275,7 @@ int main(int argc, char *argv[])
 		do
 		{
 			cout << endl
-					 << "1. Multiplication" << endl;
+				 << "1. Multiplication" << endl;
 			cout << "2. Line Multiplication" << endl;
 			cout << "3. Block Multiplication" << endl;
 			cout << "Selection?: ";
@@ -330,6 +330,7 @@ int main(int argc, char *argv[])
 
 		case 1:
 			iterations = (line_end - line_start) / increment;
+			std::cout << "Iterations: " + to_string(iterations) << endl;
 
 			for (int i = 0; i <= iterations; i++)
 			{
@@ -337,7 +338,9 @@ int main(int argc, char *argv[])
 			}
 			break;
 		case 2:
-			iterations = line_end - line_start / increment;
+			iterations = (line_end - line_start) / increment;
+			std::cout << "Iterations: " + to_string(iterations) << endl;
+
 			for (int i = 0; i <= iterations; i++)
 			{
 				OnMultLine(line_start + i * increment, col_start + i * increment);
@@ -346,7 +349,9 @@ int main(int argc, char *argv[])
 		case 3:
 			int block_no = *argv[8];
 			int thread_no = *argv[9];
-			iterations = line_end - line_start / increment;
+			iterations = (line_end - line_start) / increment;
+			std::cout << "Iterations: " + to_string(iterations) << endl;
+
 			for (int i = 0; i <= iterations; i++)
 			{
 				onMultLineBlock(line_start + i * increment, col_start + i * increment, block_no, thread_no);

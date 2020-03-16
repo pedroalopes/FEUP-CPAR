@@ -3,7 +3,7 @@
 sudo sh -c 'echo -1 >/proc/sys/kernel/perf_event_paranoid'
 g++ -O2 matrixprod.cpp -o matrixprod_c -lpapi
 
-if [ $1 == 0 ] ; then
+if [ $# == 0 ] ; then
     ./matrixprod_c 0
     exit 1;
 fi
