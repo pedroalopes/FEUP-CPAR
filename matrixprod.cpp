@@ -341,7 +341,7 @@ int main(int argc, char *argv[])
 		int col_end = atoi(argv[6]);
 		int increment = atoi(argv[7]);
 
-		myfile.open("analytics_c++.txt");
+		myfile.open("analytics_c++.txt", std::fstream::app);
 
 		switch (prod_type)
 		{
@@ -381,7 +381,7 @@ int main(int argc, char *argv[])
 				ret = PAPI_start(EventSet);
 				if (ret != PAPI_OK)
 					cout << "ERRO: Start PAPI" << endl;
-					
+
 				myfile << "OnMultLine :: lin = " + to_string(line_start + i * increment) + ", col = " + to_string(col_start + i * increment) + "\n";
 				OnMultLine(line_start + i * increment, col_start + i * increment);
 

@@ -1,0 +1,222 @@
+OnMult :: lin = 600, col = 600
+	Time: 0.266937 seconds
+	PAPI DATA -> L1 DCM: 244754702, L2 DCM: 2468 L1 ICM: 41045612, L2 ICM: 1990
+OnMult :: lin = 1000, col = 1000
+	Time: 1.991683 seconds
+	PAPI DATA -> L1 DCM: 1221658378, L2 DCM: 4748 L1 ICM: 261939090, L2 ICM: 3960
+OnMult :: lin = 1400, col = 1400
+	Time: 5.985935 seconds
+	PAPI DATA -> L1 DCM: 3533301104, L2 DCM: 6766 L1 ICM: 1469236772, L2 ICM: 6168
+OnMult :: lin = 1800, col = 1800
+	Time: 25.195211 seconds
+	PAPI DATA -> L1 DCM: 9062658979, L2 DCM: 24550 L1 ICM: 8663836149, L2 ICM: 23390
+OnMult :: lin = 2200, col = 2200
+	Time: 53.274541 seconds
+	PAPI DATA -> L1 DCM: 17629559771, L2 DCM: 56014 L1 ICM: 25022904311, L2 ICM: 53345
+OnMult :: lin = 2600, col = 2600
+	Time: 93.795370 seconds
+	PAPI DATA -> L1 DCM: 30886245099, L2 DCM: 96773 L1 ICM: 54105219709, L2 ICM: 92884
+OnMult :: lin = 3000, col = 3000
+	Time: 159.261423 seconds
+	PAPI DATA -> L1 DCM: 50292441483, L2 DCM: 179228 L1 ICM: 99035688785, L2 ICM: 176489
+OnMultLine :: lin = 600, col = 600
+	Time: 0.155609 seconds
+	PAPI DATA -> L1 DCM: 27119630, L2 DCM: 3898 L1 ICM: 54419142, L2 ICM: 3445
+OnMultLine :: lin = 1000, col = 1000
+	Time: 0.799333 seconds
+	PAPI DATA -> L1 DCM: 125919283, L2 DCM: 10688 L1 ICM: 251765857, L2 ICM: 9312
+OnMultLine :: lin = 1400, col = 1400
+	Time: 2.262164 seconds
+	PAPI DATA -> L1 DCM: 346132968, L2 DCM: 9409 L1 ICM: 688794718, L2 ICM: 8367
+OnMultLine :: lin = 1800, col = 1800
+	Time: 4.912619 seconds
+	PAPI DATA -> L1 DCM: 746722994, L2 DCM: 10097 L1 ICM: 1477970147, L2 ICM: 9171
+OnMultLine :: lin = 2200, col = 2200
+	Time: 9.183733 seconds
+	PAPI DATA -> L1 DCM: 2091834929, L2 DCM: 20940 L1 ICM: 2691935280, L2 ICM: 19358
+OnMultLine :: lin = 2600, col = 2600
+	Time: 15.238492 seconds
+	PAPI DATA -> L1 DCM: 4419198622, L2 DCM: 37697 L1 ICM: 4421802225, L2 ICM: 35811
+OnMultLine :: lin = 3000, col = 3000
+	Time: 23.434819 seconds
+	PAPI DATA -> L1 DCM: 6788123525, L2 DCM: 49361 L1 ICM: 6787063639, L2 ICM: 47276
+OnMultLineBlock :: lin = 4096, col = 4096,block = 49,thread = 50
+	Time: 0.002845 seconds
+	PAPI DATA -> L1 DCM: 25985, L2 DCM: 5689 L1 ICM: 60573, L2 ICM: 3599
+OnMultLineBlock :: lin = 6144, col = 6144,block = 49,thread = 50
+	Time: 0.000800 seconds
+	PAPI DATA -> L1 DCM: 48356, L2 DCM: 2774 L1 ICM: 107154, L2 ICM: 1884
+OnMultLineBlock :: lin = 8192, col = 8192,block = 49,thread = 50
+	Time: 0.001281 seconds
+	PAPI DATA -> L1 DCM: 96429, L2 DCM: 4926 L1 ICM: 226672, L2 ICM: 3041
+OnMultLineBlock :: lin = 10240, col = 10240,block = 49,thread = 50
+	Time: 0.001927 seconds
+	PAPI DATA -> L1 DCM: 147929, L2 DCM: 7663 L1 ICM: 345289, L2 ICM: 4516
+OnMultLineBlock :: lin = 4096, col = 4096,block = 50,thread = 50
+	Time: 0.002042 seconds
+	PAPI DATA -> L1 DCM: 70189, L2 DCM: 5435 L1 ICM: 140833, L2 ICM: 3398
+OnMultLineBlock :: lin = 6144, col = 6144,block = 50,thread = 50
+	Time: 0.000771 seconds
+	PAPI DATA -> L1 DCM: 146758, L2 DCM: 2063 L1 ICM: 290309, L2 ICM: 1529
+OnMultLineBlock :: lin = 8192, col = 8192,block = 50,thread = 50
+	Time: 0.001259 seconds
+	PAPI DATA -> L1 DCM: 265607, L2 DCM: 3583 L1 ICM: 532138, L2 ICM: 2540
+OnMultLineBlock :: lin = 10240, col = 10240,block = 50,thread = 50
+	Time: 0.001897 seconds
+	PAPI DATA -> L1 DCM: 427160, L2 DCM: 6335 L1 ICM: 884152, L2 ICM: 3407
+OnMultLineBlock :: lin = 4096, col = 4096,block = 53,thread = 50
+	Time: 0.004429 seconds
+	PAPI DATA -> L1 DCM: 36767, L2 DCM: 5807 L1 ICM: 90393, L2 ICM: 3486
+OnMultLineBlock :: lin = 6144, col = 6144,block = 53,thread = 50
+	Time: 0.000752 seconds
+	PAPI DATA -> L1 DCM: 62743, L2 DCM: 3529 L1 ICM: 140119, L2 ICM: 2201
+OnMultLineBlock :: lin = 8192, col = 8192,block = 53,thread = 50
+	Time: 0.001166 seconds
+	PAPI DATA -> L1 DCM: 86491, L2 DCM: 3768 L1 ICM: 179386, L2 ICM: 2490
+OnMultLineBlock :: lin = 10240, col = 10240,block = 53,thread = 50
+	Time: 0.001784 seconds
+	PAPI DATA -> L1 DCM: 139088, L2 DCM: 5861 L1 ICM: 307097, L2 ICM: 3779
+OnMultLineBlock :: lin = 4096, col = 4096,block = 49,thread = 52
+	Time: 0.001776 seconds
+	PAPI DATA -> L1 DCM: 27567, L2 DCM: 5413 L1 ICM: 58530, L2 ICM: 3375
+OnMultLineBlock :: lin = 6144, col = 6144,block = 49,thread = 52
+	Time: 0.000795 seconds
+	PAPI DATA -> L1 DCM: 62283, L2 DCM: 3110 L1 ICM: 137934, L2 ICM: 2166
+OnMultLineBlock :: lin = 8192, col = 8192,block = 49,thread = 52
+	Time: 0.002968 seconds
+	PAPI DATA -> L1 DCM: 76754, L2 DCM: 3308 L1 ICM: 157614, L2 ICM: 2225
+OnMultLineBlock :: lin = 10240, col = 10240,block = 49,thread = 52
+	Time: 0.001946 seconds
+	PAPI DATA -> L1 DCM: 133892, L2 DCM: 6419 L1 ICM: 292317, L2 ICM: 3745
+OnMultLineBlock :: lin = 4096, col = 4096,block = 50,thread = 52
+	Time: 0.001343 seconds
+	PAPI DATA -> L1 DCM: 32496, L2 DCM: 6173 L1 ICM: 80462, L2 ICM: 3651
+OnMultLineBlock :: lin = 6144, col = 6144,block = 50,thread = 52
+	Time: 0.000749 seconds
+	PAPI DATA -> L1 DCM: 58049, L2 DCM: 3112 L1 ICM: 149034, L2 ICM: 2116
+OnMultLineBlock :: lin = 8192, col = 8192,block = 50,thread = 52
+	Time: 0.001212 seconds
+	PAPI DATA -> L1 DCM: 104816, L2 DCM: 4089 L1 ICM: 263915, L2 ICM: 2762
+OnMultLineBlock :: lin = 10240, col = 10240,block = 50,thread = 52
+	Time: 0.001830 seconds
+	PAPI DATA -> L1 DCM: 166522, L2 DCM: 6390 L1 ICM: 438435, L2 ICM: 4008
+OnMultLineBlock :: lin = 4096, col = 4096,block = 53,thread = 52
+	Time: 0.001589 seconds
+	PAPI DATA -> L1 DCM: 28456, L2 DCM: 5214 L1 ICM: 64050, L2 ICM: 3447
+OnMultLineBlock :: lin = 6144, col = 6144,block = 53,thread = 52
+	Time: 0.000713 seconds
+	PAPI DATA -> L1 DCM: 52388, L2 DCM: 2899 L1 ICM: 106137, L2 ICM: 1918
+OnMultLineBlock :: lin = 8192, col = 8192,block = 53,thread = 52
+	Time: 0.001155 seconds
+	PAPI DATA -> L1 DCM: 80490, L2 DCM: 4136 L1 ICM: 175948, L2 ICM: 2863
+OnMultLineBlock :: lin = 10240, col = 10240,block = 53,thread = 52
+	Time: 0.001740 seconds
+	PAPI DATA -> L1 DCM: 115384, L2 DCM: 5277 L1 ICM: 246339, L2 ICM: 3271
+OnMultLineBlock :: lin = 4096, col = 4096,block = 49,thread = 54
+	Time: 0.002581 seconds
+	PAPI DATA -> L1 DCM: 32273, L2 DCM: 5373 L1 ICM: 92721, L2 ICM: 3481
+OnMultLineBlock :: lin = 6144, col = 6144,block = 49,thread = 54
+	Time: 0.000723 seconds
+	PAPI DATA -> L1 DCM: 45203, L2 DCM: 3180 L1 ICM: 106953, L2 ICM: 2035
+OnMultLineBlock :: lin = 8192, col = 8192,block = 49,thread = 54
+	Time: 0.001203 seconds
+	PAPI DATA -> L1 DCM: 74109, L2 DCM: 3678 L1 ICM: 175531, L2 ICM: 2531
+OnMultLineBlock :: lin = 10240, col = 10240,block = 49,thread = 54
+	Time: 0.001822 seconds
+	PAPI DATA -> L1 DCM: 117896, L2 DCM: 6255 L1 ICM: 289757, L2 ICM: 3685
+OnMultLineBlock :: lin = 4096, col = 4096,block = 50,thread = 54
+	Time: 0.001299 seconds
+	PAPI DATA -> L1 DCM: 61951, L2 DCM: 8807 L1 ICM: 167441, L2 ICM: 4173
+OnMultLineBlock :: lin = 6144, col = 6144,block = 50,thread = 54
+	Time: 0.000742 seconds
+	PAPI DATA -> L1 DCM: 59622, L2 DCM: 2949 L1 ICM: 152052, L2 ICM: 1930
+OnMultLineBlock :: lin = 8192, col = 8192,block = 50,thread = 54
+	Time: 0.001167 seconds
+	PAPI DATA -> L1 DCM: 103299, L2 DCM: 5220 L1 ICM: 269643, L2 ICM: 3135
+OnMultLineBlock :: lin = 10240, col = 10240,block = 50,thread = 54
+	Time: 0.001747 seconds
+	PAPI DATA -> L1 DCM: 163485, L2 DCM: 6000 L1 ICM: 441572, L2 ICM: 3720
+OnMultLineBlock :: lin = 4096, col = 4096,block = 53,thread = 54
+	Time: 0.002332 seconds
+	PAPI DATA -> L1 DCM: 32408, L2 DCM: 5463 L1 ICM: 71238, L2 ICM: 3564
+OnMultLineBlock :: lin = 6144, col = 6144,block = 53,thread = 54
+	Time: 0.000705 seconds
+	PAPI DATA -> L1 DCM: 51219, L2 DCM: 2801 L1 ICM: 107323, L2 ICM: 1912
+OnMultLineBlock :: lin = 8192, col = 8192,block = 53,thread = 54
+	Time: 0.001110 seconds
+	PAPI DATA -> L1 DCM: 87192, L2 DCM: 3815 L1 ICM: 187552, L2 ICM: 2754
+OnMultLineBlock :: lin = 10240, col = 10240,block = 53,thread = 54
+	Time: 0.001678 seconds
+	PAPI DATA -> L1 DCM: 130129, L2 DCM: 5359 L1 ICM: 286299, L2 ICM: 3456
+OnMultLineBlock :: lin = 4096, col = 4096,block = 49,thread = 56
+	Time: 0.001959 seconds
+	PAPI DATA -> L1 DCM: 33999, L2 DCM: 6417 L1 ICM: 79757, L2 ICM: 3776
+OnMultLineBlock :: lin = 6144, col = 6144,block = 49,thread = 56
+	Time: 0.000744 seconds
+	PAPI DATA -> L1 DCM: 44223, L2 DCM: 3105 L1 ICM: 95957, L2 ICM: 1950
+OnMultLineBlock :: lin = 8192, col = 8192,block = 49,thread = 56
+	Time: 0.001729 seconds
+	PAPI DATA -> L1 DCM: 79625, L2 DCM: 4104 L1 ICM: 193971, L2 ICM: 2559
+OnMultLineBlock :: lin = 10240, col = 10240,block = 49,thread = 56
+	Time: 0.001786 seconds
+	PAPI DATA -> L1 DCM: 144143, L2 DCM: 7982 L1 ICM: 375843, L2 ICM: 3837
+OnMultLineBlock :: lin = 4096, col = 4096,block = 50,thread = 56
+	Time: 0.000548 seconds
+	PAPI DATA -> L1 DCM: 28476, L2 DCM: 5781 L1 ICM: 64894, L2 ICM: 3651
+OnMultLineBlock :: lin = 6144, col = 6144,block = 50,thread = 56
+	Time: 0.000733 seconds
+	PAPI DATA -> L1 DCM: 45345, L2 DCM: 2879 L1 ICM: 99367, L2 ICM: 1814
+OnMultLineBlock :: lin = 8192, col = 8192,block = 50,thread = 56
+	Time: 0.001153 seconds
+	PAPI DATA -> L1 DCM: 74275, L2 DCM: 3940 L1 ICM: 170022, L2 ICM: 2540
+OnMultLineBlock :: lin = 10240, col = 10240,block = 50,thread = 56
+	Time: 0.001756 seconds
+	PAPI DATA -> L1 DCM: 111858, L2 DCM: 6882 L1 ICM: 257993, L2 ICM: 3773
+OnMultLineBlock :: lin = 4096, col = 4096,block = 53,thread = 56
+	Time: 0.002647 seconds
+	PAPI DATA -> L1 DCM: 76707, L2 DCM: 6009 L1 ICM: 247129, L2 ICM: 3783
+OnMultLineBlock :: lin = 6144, col = 6144,block = 53,thread = 56
+	Time: 0.000703 seconds
+	PAPI DATA -> L1 DCM: 159117, L2 DCM: 3028 L1 ICM: 528291, L2 ICM: 2101
+OnMultLineBlock :: lin = 8192, col = 8192,block = 53,thread = 56
+	Time: 0.001101 seconds
+	PAPI DATA -> L1 DCM: 281673, L2 DCM: 4038 L1 ICM: 949604, L2 ICM: 2928
+OnMultLineBlock :: lin = 10240, col = 10240,block = 53,thread = 56
+	Time: 0.001688 seconds
+	PAPI DATA -> L1 DCM: 439986, L2 DCM: 5593 L1 ICM: 1497758, L2 ICM: 3727
+OnMultLineBlock :: lin = 4096, col = 4096,block = 49,thread = 49
+	Time: 0.002007 seconds
+	PAPI DATA -> L1 DCM: 38996, L2 DCM: 5703 L1 ICM: 99841, L2 ICM: 3414
+OnMultLineBlock :: lin = 6144, col = 6144,block = 49,thread = 49
+	Time: 0.000794 seconds
+	PAPI DATA -> L1 DCM: 60169, L2 DCM: 2971 L1 ICM: 150763, L2 ICM: 2004
+OnMultLineBlock :: lin = 8192, col = 8192,block = 49,thread = 49
+	Time: 0.001299 seconds
+	PAPI DATA -> L1 DCM: 108921, L2 DCM: 3979 L1 ICM: 293097, L2 ICM: 2531
+OnMultLineBlock :: lin = 10240, col = 10240,block = 49,thread = 49
+	Time: 0.001938 seconds
+	PAPI DATA -> L1 DCM: 153368, L2 DCM: 5457 L1 ICM: 408376, L2 ICM: 3375
+OnMultLineBlock :: lin = 4096, col = 4096,block = 50,thread = 49
+	Time: 0.000805 seconds
+	PAPI DATA -> L1 DCM: 64924, L2 DCM: 9803 L1 ICM: 176557, L2 ICM: 4495
+OnMultLineBlock :: lin = 6144, col = 6144,block = 50,thread = 49
+	Time: 0.000790 seconds
+	PAPI DATA -> L1 DCM: 48764, L2 DCM: 2553 L1 ICM: 106435, L2 ICM: 1730
+OnMultLineBlock :: lin = 8192, col = 8192,block = 50,thread = 49
+	Time: 0.001251 seconds
+	PAPI DATA -> L1 DCM: 76423, L2 DCM: 4163 L1 ICM: 161385, L2 ICM: 2584
+OnMultLineBlock :: lin = 10240, col = 10240,block = 50,thread = 49
+	Time: 0.013760 seconds
+	PAPI DATA -> L1 DCM: 126223, L2 DCM: 6753 L1 ICM: 279230, L2 ICM: 4439
+OnMultLineBlock :: lin = 4096, col = 4096,block = 53,thread = 49
+	Time: 0.000943 seconds
+	PAPI DATA -> L1 DCM: 33928, L2 DCM: 5705 L1 ICM: 81132, L2 ICM: 3537
+OnMultLineBlock :: lin = 6144, col = 6144,block = 53,thread = 49
+	Time: 0.000751 seconds
+	PAPI DATA -> L1 DCM: 64900, L2 DCM: 2981 L1 ICM: 166295, L2 ICM: 2004
+OnMultLineBlock :: lin = 8192, col = 8192,block = 53,thread = 49
+	Time: 0.001204 seconds
+	PAPI DATA -> L1 DCM: 118581, L2 DCM: 4719 L1 ICM: 332394, L2 ICM: 3063
+OnMultLineBlock :: lin = 10240, col = 10240,block = 53,thread = 49
+	Time: 0.001844 seconds
+	PAPI DATA -> L1 DCM: 157234, L2 DCM: 6356 L1 ICM: 430944, L2 ICM: 3482
