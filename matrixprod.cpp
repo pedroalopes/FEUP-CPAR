@@ -1,6 +1,7 @@
 #include <omp.h>
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
 #include <iomanip>
 #include <time.h>
 #include <cstdlib>
@@ -9,6 +10,7 @@
 using namespace std;
 
 #define SYSTEMTIME clock_t
+std::ofstream myfile;
 
 void OnMult(int m_ar, int m_br)
 {
@@ -49,8 +51,10 @@ void OnMult(int m_ar, int m_br)
 	}
 
 	Time2 = clock();
-	sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
+	sprintf(st, "Time: %3.6f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
 	cout << st;
+
+	myfile << "\t" << st;
 
 	// cout << "Result matrix: " << endl;
 	// for (i = 0; i < m_ar; i++)
@@ -108,8 +112,10 @@ void OnMultLine(int m_ar, int m_br)
 	}
 
 	Time2 = clock();
-	sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
+	sprintf(st, "Time: %3.6f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
 	cout << st;
+
+	myfile << "\t" << st;
 
 	// cout << "Result matrix: " << endl;
 	// for (i = 0; i < m_ar; i++)
@@ -156,7 +162,7 @@ void onMultLineBlockProd(int m_ar, int m_br, int b, int t, int tn, double *pha, 
 void onMultLineBlock(int m_ar, int m_br, int b, int t)
 {
 
-	SYSTEMTIME Time1, Time2;
+	double Time1, Time2;
 
 	char st[100];
 	double temp;
@@ -182,7 +188,7 @@ void onMultLineBlock(int m_ar, int m_br, int b, int t)
 		for (j = 0; j < m_br; j++)
 			phb[i * m_br + j] = (double)(i + 1);
 
-	Time1 = clock();
+	Time1 = omp_get_wtime();
 
 #pragma omp parallel for
 	for (i = 0; i < t; i++)
@@ -190,9 +196,7 @@ void onMultLineBlock(int m_ar, int m_br, int b, int t)
 		onMultLineBlockProd(m_ar, m_br, b, t, i, pha, phb, phc);
 	}
 
-	Time2 = clock();
-	sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
-	cout << st;
+	Time2 = omp_get_wtime();
 
 	// cout << "Result matrix: " << endl;
 	// for (i = 0; i < m_br; i++)
@@ -203,6 +207,11 @@ void onMultLineBlock(int m_ar, int m_br, int b, int t)
 	// 	cout << endl;
 	// }
 	// cout << endl;
+
+	sprintf(st, "Time: %3.6f seconds\n", Time2 - Time1);
+	cout << st;
+
+	myfile << "\t" << st;
 
 	free(pha);
 	free(phb);
@@ -250,7 +259,7 @@ int main(int argc, char *argv[])
 	int op;
 
 	int EventSet = PAPI_NULL;
-	long long values[2];
+	long long values[4];
 	int ret;
 
 	ret = PAPI_library_init(PAPI_VER_CURRENT);
@@ -265,7 +274,14 @@ int main(int argc, char *argv[])
 	if (ret != PAPI_OK)
 		cout << "ERRO: PAPI_L1_DCM" << endl;
 
+	ret = PAPI_add_event(EventSet, PAPI_L1_ICM);
+	if (ret != PAPI_OK)
+		cout << "ERRO: PAPI_L1_DCM" << endl;
+
 	ret = PAPI_add_event(EventSet, PAPI_L2_DCM);
+	if (ret != PAPI_OK)
+		cout << "ERRO: PAPI_L2_DCM" << endl;
+	ret = PAPI_add_event(EventSet, PAPI_L2_ICM);
 	if (ret != PAPI_OK)
 		cout << "ERRO: PAPI_L2_DCM" << endl;
 
@@ -325,6 +341,8 @@ int main(int argc, char *argv[])
 		int col_end = atoi(argv[6]);
 		int increment = atoi(argv[7]);
 
+		myfile.open("analytics_c++.txt");
+
 		switch (prod_type)
 		{
 
@@ -334,7 +352,23 @@ int main(int argc, char *argv[])
 
 			for (int i = 0; i <= iterations; i++)
 			{
+				ret = PAPI_start(EventSet);
+				if (ret != PAPI_OK)
+					cout << "ERRO: Start PAPI" << endl;
+
+				myfile << "OnMult :: lin = " + to_string(line_start + i * increment) + ", col = " + to_string(col_start + i * increment) + "\n";
 				OnMult(line_start + i * increment, col_start + i * increment);
+
+				ret = PAPI_stop(EventSet, values);
+				if (ret != PAPI_OK)
+					cout << "ERRO: Stop PAPI" << endl;
+
+				ret = PAPI_reset(EventSet);
+				if (ret != PAPI_OK)
+					std::cout << "FAIL reset" << endl;
+
+				myfile << "\tPAPI DATA -> L1 DCM: " + to_string(values[0]) + ", L2 DCM: " + to_string(values[1]);
+				myfile << " L1 ICM: " + to_string(values[2]) + ", L2 ICM: " + to_string(values[3]) + "\n";
 			}
 			break;
 		case 2:
@@ -343,7 +377,24 @@ int main(int argc, char *argv[])
 
 			for (int i = 0; i <= iterations; i++)
 			{
+
+				ret = PAPI_start(EventSet);
+				if (ret != PAPI_OK)
+					cout << "ERRO: Start PAPI" << endl;
+					
+				myfile << "OnMultLine :: lin = " + to_string(line_start + i * increment) + ", col = " + to_string(col_start + i * increment) + "\n";
 				OnMultLine(line_start + i * increment, col_start + i * increment);
+
+				ret = PAPI_stop(EventSet, values);
+				if (ret != PAPI_OK)
+					cout << "ERRO: Stop PAPI" << endl;
+
+				ret = PAPI_reset(EventSet);
+				if (ret != PAPI_OK)
+					std::cout << "FAIL reset" << endl;
+
+				myfile << "\tPAPI DATA -> L1 DCM: " + to_string(values[0]) + ", L2 DCM: " + to_string(values[1]);
+				myfile << " L1 ICM: " + to_string(values[2]) + ", L2 ICM: " + to_string(values[3]) + "\n";
 			}
 			break;
 		case 3:
@@ -354,9 +405,28 @@ int main(int argc, char *argv[])
 
 			for (int i = 0; i <= iterations; i++)
 			{
+
+				ret = PAPI_start(EventSet);
+				if (ret != PAPI_OK)
+					cout << "ERRO: Start PAPI" << endl;
+
+				myfile << "OnMultLineBlock :: lin = " + to_string(line_start + i * increment) + ", col = " + to_string(col_start + i * increment) + ",block = " + to_string(block_no) + ",thread = " + to_string(thread_no) + "\n";
 				onMultLineBlock(line_start + i * increment, col_start + i * increment, block_no, thread_no);
+
+				ret = PAPI_stop(EventSet, values);
+				if (ret != PAPI_OK)
+					cout << "ERRO: Stop PAPI" << endl;
+
+				ret = PAPI_reset(EventSet);
+				if (ret != PAPI_OK)
+					std::cout << "FAIL reset" << endl;
+
+				myfile << "\tPAPI DATA -> L1 DCM: " + to_string(values[0]) + ", L2 DCM: " + to_string(values[1]);
+				myfile << " L1 ICM: " + to_string(values[2]) + ", L2 ICM: " + to_string(values[3]) + "\n";
 			}
 		}
+
+		myfile.close();
 	}
 
 	ret = PAPI_remove_event(EventSet, PAPI_L1_DCM);
@@ -364,6 +434,13 @@ int main(int argc, char *argv[])
 		std::cout << "FAIL remove event" << endl;
 
 	ret = PAPI_remove_event(EventSet, PAPI_L2_DCM);
+	if (ret != PAPI_OK)
+		std::cout << "FAIL remove event" << endl;
+
+	ret = PAPI_remove_event(EventSet, PAPI_L1_ICM);
+	if (ret != PAPI_OK)
+		std::cout << "FAIL remove event" << endl;
+	ret = PAPI_remove_event(EventSet, PAPI_L2_ICM);
 	if (ret != PAPI_OK)
 		std::cout << "FAIL remove event" << endl;
 
