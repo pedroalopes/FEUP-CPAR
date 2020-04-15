@@ -398,8 +398,8 @@ int main(int argc, char *argv[])
 			}
 			break;
 		case 3:
-			int block_no = *argv[8];
-			int thread_no = *argv[9];
+			int block_no = atoi(argv[8]);
+			int thread_no = atoi(argv[9]);
 			iterations = (line_end - line_start) / increment;
 			std::cout << "Iterations: " + to_string(iterations) << endl;
 

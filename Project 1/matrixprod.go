@@ -135,8 +135,12 @@ func OnMultLineBlock(m_ar, m_br, b, t int) {
   elapsed := time.Since(start)
   fmt.Println("Time(OnMultLineBlock): ", elapsed)
   
-  /*fmt.Println("Result Matrix:")
-  PrintMatrix(m_ar, m_br, &phc)*/
+  fmt.Println("Result Matrix:")
+  PrintMatrix(m_ar, m_br, &pha)
+  fmt.Println()
+  PrintMatrix(m_ar, m_br, &phb)
+  fmt.Println()
+  PrintMatrix(m_ar, m_br, &phc)
 }
 
 func OnMultLineBlockProd(m_ar, m_br, b, t, tn int, pha, phb, phc Matrix) {
