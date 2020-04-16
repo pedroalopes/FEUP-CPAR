@@ -8,21 +8,28 @@ using namespace std;
 typedef long long ll;
 bool *primes;
 
-void sieve(ll k, ll n) {
+void sieve(ll start, ll end, ll n) {
     
-    do
+    for(ll k = 3; k*k <= n; k+=2) 
     {
-        for (long long j = k*k ; j<n ; j+=2*k)
-        {   primes[j>>1]=true;
-        }
-        
-        do
-        {
-            k+=2;
-        }while (k*k <= n && primes[k>>1]);
-        
-    } while (k*k <= n);
+        if(primes[k>>1])
+            continue;
 
+        ll j = k*k;
+        if (start > j) {
+            ll tmp = (start-j)/k;
+            if(tmp < 2)
+                tmp = 2;
+            else if(tmp % 2 != 0)
+                tmp++;
+            j+=k*tmp;
+        }
+
+        for (; j<end ; j+=2*k)
+        {   
+            primes[j>>1]=true;
+        }
+    } 
 }
 
 int main (int argc, char *argv[])
@@ -35,30 +42,32 @@ int main (int argc, char *argv[])
     n = pow(10,n);
     primes = new bool[n];
 
-    int nr_threads=1;
-    ll block_size = n / nr_threads + 1;
+    int nr_threads=4;
+    ll block_size = n / nr_threads;
     
-    clock_t start, finish;
-    start = clock();
+    struct timespec start, end;
+	clock_gettime(CLOCK_REALTIME, &start);
 
     #pragma omp parallel for schedule(dynamic) num_threads(nr_threads)
-    for(int s = 3; s < n; s += block_size) {
-        int end_point = s + block_size;
-        int start_point = s;
-        start_point = ((start_point>>1)<<1) + 1;
-        sieve(start_point, end_point);
+    for (ll i = 0; i<n ; i+=block_size) {
+        ll b_end = i + block_size;
+        b_end = b_end > n ? n : b_end;
+        sieve(i, b_end, n);
     }
     
-    finish = clock();
-    double cpu_time_used = (double(finish-start)/CLOCKS_PER_SEC);
-    
+    clock_gettime(CLOCK_REALTIME, &end);
+
+	double time_spent = (end.tv_sec - start.tv_sec) +
+						(end.tv_nsec - start.tv_nsec) / 1000000000.0;
+
     ll count = 0;
     for (int i=1; i<n; i+=2)
-        if (!primes[i>>1])
-            //cout << i << " ";
+        if (!primes[i>>1]) {
+//            cout << i << " ";
             count+=1;
+        }
 
-    printf("\nLoop took %f seconds to execute. Found %llu primes\n", cpu_time_used, count);
+    printf("Loop took %f seconds to execute. Found %llu primes\n", time_spent , count);
 
     free(primes);
     return 0;
