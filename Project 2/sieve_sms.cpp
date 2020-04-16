@@ -8,9 +8,9 @@ using namespace std;
 typedef long long ll;
 bool *primes;
 
-void sieve(ll start, ll end, ll n) {
+void sieve(ll start, ll end) {
     
-    for(ll k = 3; k*k <= n; k+=2) 
+    for(ll k = 3; k*k <= end; k+=2) 
     {
         if(primes[k>>1])
             continue;
@@ -52,7 +52,7 @@ int main (int argc, char *argv[])
     for (ll i = 0; i<n ; i+=block_size) {
         ll b_end = i + block_size;
         b_end = b_end > n ? n : b_end;
-        sieve(i, b_end, n);
+        sieve(i, b_end);
     }
     
     clock_gettime(CLOCK_REALTIME, &end);
