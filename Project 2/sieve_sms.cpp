@@ -17,12 +17,12 @@ void sieve(ll start, ll end, ll n) {
 
         ll j = k*k;
         if (start > j) {
-            ll tmp = (start-j)/k;
-            if(tmp < 2)
-                tmp = 2;
-            else if(tmp % 2 != 0)
-                tmp++;
-            j+=k*tmp;
+            ll mult = (start-j)/k;
+            if(mult < 2)
+                mult = 2;
+            else if(mult & 1)
+                mult++;
+            j+=k*mult;
         }
 
         for (; j<end ; j+=2*k)
@@ -40,7 +40,7 @@ int main (int argc, char *argv[])
     cin >> n;
  
     n = pow(10,n);
-    primes = new bool[n];
+    primes = new bool[n/2];
 
     int nr_threads=4;
     ll block_size = n / nr_threads;
