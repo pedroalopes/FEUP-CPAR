@@ -43,7 +43,7 @@ int main (int argc, char *argv[])
     primes = new bool[n/2];
 
     int nr_threads=4;
-    ll block_size = n / nr_threads;
+    ll block_size = n / nr_threads + 1;
     
     struct timespec start, end;
 	clock_gettime(CLOCK_REALTIME, &start);
