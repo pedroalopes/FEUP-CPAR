@@ -10,24 +10,24 @@ typedef long long ll;
 bool *primes;
 
 void sieve(ll start, ll end) {
-    for(ll k = 3; k*k <= end; k+=2) 
+
+    ll k = 3;
+
+    do
     {
-        if(primes[k>>1])
-            continue;
-        ll j = k*k;
-        if (start > j) {
-            ll mult = (start-j)/k;
-            if(mult < 2)
-                mult = 2;
-            else if(mult & 1)
-                mult++;
-            j+=k*mult;
+        ll x = (start - k*k) / (2*k);
+        if(x < 0)
+            x = 0;
+        for (long long j = k*k + 2*k*x ; j<end ; j+=2*k)
+        {   primes[j>>1]=true;
         }
-        for (; j<end ; j+=2*k)
-        {   
-            primes[j>>1]=true;
-        }
-    } 
+        
+        do
+        {
+            k+=2;
+        }while (k*k <= end && primes[k>>1]);
+        
+    } while (k*k <= end);
 }
 
 ll countPrimes(int ini, int end) {

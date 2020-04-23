@@ -33,15 +33,15 @@ int main (int argc, char *argv[])
         }while (k*k <= n && primes[k>>1]);
         
     } while (k*k <= n);
-
-    finish = clock();
-    double cpu_time_used = (double(finish-start)/CLOCKS_PER_SEC);
     
     unsigned long long count = 0;
     for (int i=1; i<n; i+=2)
         if (!primes[i>>1])
             //cout << i << " ";
-            count+=1;
+            ++count;
+
+    finish = clock();
+    double cpu_time_used = (double(finish-start)/CLOCKS_PER_SEC);
 
     printf("\nLoop took %f seconds to execute. Found %llu primes\n", cpu_time_used, count);
 }
