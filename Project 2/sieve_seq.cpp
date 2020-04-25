@@ -14,7 +14,7 @@ int main (int argc, char *argv[])
  
     n = pow(10,n);
     
-    bool *primes = new bool[n];
+    bool *primes = new bool[n]();
     
     long long k = 3;
 

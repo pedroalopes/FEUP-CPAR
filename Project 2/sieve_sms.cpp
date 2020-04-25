@@ -37,7 +37,7 @@ int main (int argc, char *argv[])
     cin >> n;
  
     n = pow(10,n);
-    primes = new bool[n/2];
+    primes = new bool[n/2]();
 
     int nr_threads=4;
     ll block_size = n / nr_threads + 1;
