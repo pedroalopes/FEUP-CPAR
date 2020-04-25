@@ -14,10 +14,10 @@ void sieve(ll start, ll end) {
 
     do
     {
-        ll x = (start - k*k) / (2*k);
+        ll x = (start - k*k) / (k<<1);
         if(x < 0)
             x = 0;
-        for (long long j = k*k + 2*k*x ; j<end ; j+=2*k)
+        for (long long j = k*k + 2*k*x ; j<end ; j+=k<<1)
         {   primes[j>>1]=true;
         }
         

@@ -14,7 +14,7 @@ int main (int argc, char *argv[])
  
     n = pow(10,n);
     
-    bool *primes = new bool[n]();
+    bool *primes = new bool[n>>1]();
     
     long long k = 3;
 
@@ -23,7 +23,7 @@ int main (int argc, char *argv[])
 
     do
     {
-        for (long long j = k*k ; j<n ; j+=2*k)
+        for (long long j = k*k ; j<n ; j+=k<<1)
         {   primes[j>>1]=true;
         }
         
