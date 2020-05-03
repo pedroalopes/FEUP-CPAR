@@ -68,7 +68,7 @@ ll countPrimes(bool *primes, int s, ll ini, ll end) {
 
 int main (int argc, char *argv[])
 {
-    int n = 5;
+    ll n = 5;
     if(argc >= 2) 
         n = atoi(argv[1]);
 
