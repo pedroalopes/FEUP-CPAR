@@ -33,10 +33,15 @@ int main (int argc, char *argv[])
 {
     ll n;
     
-    cout << "Power of 10: ";
-    cin >> n;
- 
-    n = pow(10,n);
+    if(argc >= 2) {
+        n = atoi(argv[1]);
+    } else {
+        cout << "Power of 10: ";
+        cin >> n;
+     
+        n = pow(10,n);
+    }
+    
     primes = new bool[n/2]();
 
     int nr_threads=4;

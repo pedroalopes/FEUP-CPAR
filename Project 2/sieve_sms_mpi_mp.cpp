@@ -56,7 +56,6 @@ int main (int argc, char *argv[])
    	MPI_Comm_size(MPI_COMM_WORLD, &size);
    	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     
-    n = pow(10,n);
     primes = new bool[n/2]();
 
     struct timespec start, end;

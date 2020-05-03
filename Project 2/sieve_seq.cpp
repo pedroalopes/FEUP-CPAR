@@ -9,10 +9,14 @@ int main (int argc, char *argv[])
 {
     long long n;
     
-    cout << "Power of 10: ";
-    cin >> n;
- 
-    n = pow(10,n);
+    if(argc >= 2) {
+        n = atoi(argv[1]);
+    } else {
+        cout << "Power of 10: ";
+        cin >> n;
+     
+        n = pow(10,n);
+    }
     
     bool *primes = new bool[n>>1]();
     
