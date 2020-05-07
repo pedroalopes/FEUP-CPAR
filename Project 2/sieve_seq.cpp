@@ -10,7 +10,7 @@ int main (int argc, char *argv[])
     long long n;
     
     if(argc >= 2) {
-        n = atoi(argv[1]);
+        n = 2<<(atoi(argv[1])-1);
     } else {
         cout << "Power of 10: ";
         cin >> n;
@@ -47,5 +47,5 @@ int main (int argc, char *argv[])
     finish = clock();
     double cpu_time_used = (double(finish-start)/CLOCKS_PER_SEC);
 
-    printf("\nLoop took %f seconds to execute. Found %llu primes\n", cpu_time_used, count);
+    printf("Loop took %f seconds to execute. Found %llu primes\n", cpu_time_used, count);
 }

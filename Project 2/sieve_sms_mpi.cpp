@@ -45,7 +45,7 @@ int main (int argc, char *argv[])
 {
     int n = 5;
     if(argc >= 2) 
-        n = atoi(argv[1]);
+        n = 2<<(atoi(argv[1])-1);
 
     int rank, size;
 

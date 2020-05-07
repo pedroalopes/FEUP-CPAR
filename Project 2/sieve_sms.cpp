@@ -34,7 +34,7 @@ int main (int argc, char *argv[])
     ll n;
     
     if(argc >= 2) {
-        n = atoi(argv[1]);
+        n = 2<<(atoi(argv[1])-1);
     } else {
         cout << "Power of 10: ";
         cin >> n;
@@ -42,7 +42,7 @@ int main (int argc, char *argv[])
         n = pow(10,n);
     }
     
-    primes = new bool[n/2]();
+    primes = new bool[n>>1]();
 
     int nr_threads=4;
     ll block_size = n / nr_threads + 1;

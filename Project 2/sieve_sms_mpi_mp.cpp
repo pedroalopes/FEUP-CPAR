@@ -46,7 +46,7 @@ int main (int argc, char *argv[])
     ll n = 5;
     int nr_threads = 1;
     if(argc >= 2) {
-        n = atoi(argv[1]);
+        n = 2<<(atoi(argv[1])-1);
         nr_threads = atoi(argv[2]);
     }
 
