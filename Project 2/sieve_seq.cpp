@@ -17,6 +17,38 @@ int main (int argc, char *argv[])
      
         n = pow(10,n);
     }
+
+    // PAPI 
+	int EventSet = PAPI_NULL;
+  	long long values[2];
+  	int ret;
+
+	ret = PAPI_library_init( PAPI_VER_CURRENT );
+	if ( ret != PAPI_VER_CURRENT )
+		cout << "FAIL" << endl;
+
+	ret = PAPI_create_eventset(&EventSet);
+	if (ret != PAPI_OK)
+		cout << "ERRO: create eventset" << endl;
+
+	ret = PAPI_add_event(EventSet,PAPI_L1_DCM );
+	if (ret != PAPI_OK)
+		cout << "ERRO: PAPI_L1_DCM" << endl;
+
+	ret = PAPI_add_event(EventSet,PAPI_L2_DCM);
+	if (ret != PAPI_OK)
+		cout << "ERRO: PAPI_L2_DCM" << endl;
+
+	ret = PAPI_start(EventSet);
+	if (ret != PAPI_OK)
+		cout << "ERRO: Start PAPI" << endl;
+    // PAPI
+
+	struct timespec start, finish;
+	double elapsed;
+	if (rank == root) {
+		clock_gettime(CLOCK_MONOTONIC, &start);
+	}
     
     bool *primes = new bool[n>>1]();
     
@@ -48,4 +80,25 @@ int main (int argc, char *argv[])
     double cpu_time_used = (double(finish-start)/CLOCKS_PER_SEC);
 
     printf("Loop took %f seconds to execute. Found %llu primes\n", cpu_time_used, count);
+
+    // PAPI 
+	ret = PAPI_stop(EventSet, values);
+  		if (ret != PAPI_OK) cout << "ERRO: Stop PAPI" << endl;
+
+	ret = PAPI_reset( EventSet );
+	if ( ret != PAPI_OK )
+		cout << "FAIL reset" << endl;
+
+	ret = PAPI_remove_event( EventSet, PAPI_L1_DCM );
+	if ( ret != PAPI_OK )
+		cout << "FAIL remove event" << endl;
+
+	ret = PAPI_remove_event( EventSet, PAPI_L2_DCM );
+	if ( ret != PAPI_OK )
+		cout << "FAIL remove event" << endl;
+
+	ret = PAPI_destroy_eventset( &EventSet );
+	if ( ret != PAPI_OK )
+		cout << "FAIL destroy" << endl;
+    // PAPI 
 }
