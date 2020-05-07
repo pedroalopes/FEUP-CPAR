@@ -2,6 +2,7 @@
 #include <iomanip>
 #include <math.h>
 #include <time.h>
+#include <papi.h>
 
 using namespace std;
 
