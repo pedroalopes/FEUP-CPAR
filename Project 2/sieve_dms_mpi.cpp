@@ -140,6 +140,9 @@ int main (int argc, char *argv[])
 	ret = PAPI_stop(EventSet, values);
   		if (ret != PAPI_OK) cout << "ERRO: Stop PAPI" << endl;
 
+    printf("\tL1 DCM: %lld \n", values[0]);
+    printf("\tL2 DCM: %lld \n", values[1]);
+
 	ret = PAPI_reset( EventSet );
 	if ( ret != PAPI_OK )
 		cout << "FAIL reset" << endl;
