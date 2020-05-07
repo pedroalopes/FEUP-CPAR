@@ -58,7 +58,7 @@ int main (int argc, char *argv[])
 
     // PAPI 
 	int EventSet = PAPI_NULL;
-  	long long values[2];
+  	ll values[2];
   	int ret;
 
 	ret = PAPI_library_init( PAPI_VER_CURRENT );
@@ -82,7 +82,7 @@ int main (int argc, char *argv[])
 		cout << "ERRO: Start PAPI" << endl;
     // PAPI
     
-    primes = new bool[n/2]();
+    primes = new bool[n>>1]();
 
     struct timespec start, end;
     ll total = 0;

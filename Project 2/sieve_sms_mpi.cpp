@@ -43,7 +43,7 @@ ll countPrimes(int ini, int end) {
 
 int main (int argc, char *argv[])
 {
-    int n = 5;
+    ll n = 5;
     if(argc >= 2) 
         n = 2<<(atoi(argv[1])-1);
 
@@ -55,7 +55,7 @@ int main (int argc, char *argv[])
     
     // PAPI 
 	int EventSet = PAPI_NULL;
-  	long long values[2];
+  	ll values[2];
   	int ret;
 
 	ret = PAPI_library_init( PAPI_VER_CURRENT );
