@@ -3,36 +3,40 @@
 #include <math.h>
 #include <time.h>
 #include <mpi.h>
-#include <papi.h>
+//#include <papi.h>
 
 using namespace std;
 
 typedef long long ll;
 
-void sieve(bool* primes, ll start, ll end) {
-    ll ini = 3;
-    if(ini < start)
-        ini = start;
+void sieve(unsigned int* primes, ll end) {
 
-    for(ll i = ini; i<end; i+=2) {
-        int idx = (i>>1) - (start>>1);
-        if (!primes[idx]) {
-            for(int j = i*i; j<end; j+=i<<1) {
-                idx = (j>>1) - (start>>1);
-                primes[idx] = true;
-            }
-        }
-    }
-}
-
-void rmSmallPrimes(bool* primes, ll start, ll end, int n) {
-
-    bool *sml_primes = new bool[((int)sqrt(n))>>1]();
     ll k = 3;
     do
     {
-        ll x = (start - k*k) / (2*k);
-        ll ini = k*k + 2*k*x;
+        for (long long j = k*k ; j<end ; j+=k<<1)
+        {  
+            primes[j>>6]|=(1<<((j>>1)&31));
+        }
+        
+        do
+        {
+            k+=2;
+        }while (k*k <= end && primes[k>>6]&(1<<((k>>1)&31)));
+        
+    } while (k*k <= end);
+}
+
+void rmSmallPrimes(unsigned int* primes, ll start, ll end, ll n) {
+
+    ll sml_primes_size = (((int)sqrt(n))>>6)+1; 
+    unsigned int *sml_primes = new unsigned int[sml_primes_size]();
+    sieve(sml_primes,((int)sqrt(n)));
+    ll k = 3;
+    do
+    {
+        ll x = (start - k*k) / (k<<1);
+        ll ini = k*k + ((k*x)>>1);
 
         if(x < 0)
             x = 0;
@@ -42,28 +46,28 @@ void rmSmallPrimes(bool* primes, ll start, ll end, int n) {
         ini = k*k + 2*k*x;
 
         for (long long j = ini ; j<end ; j+=k<<1)
-        {   primes[(j>>1)-(start>>1)]=true;
+        {  
+            int idx = j - start;
+            primes[idx>>6]|=(1<<((idx>>1)&31));
         }
         
         do
         {
             k+=2;
-        }while (k*k <= end && sml_primes[k>>1]);
+        }while (k*k <= end && k < ((int)sqrt(n)) && sml_primes[k>>6]&(1<<((k>>1)&31)));
         
-    } while (k*k <= end);
+    } while (k*k <= end && k < ((int)sqrt(n)));
     delete[] sml_primes;
 }
 
-ll countPrimes(bool *primes, int s, ll ini, ll end) {
+ll countPrimes(unsigned int *primes, ll primes_size, ll n) {
     ll count = 0;
-    if(ini%2 == 0)
-        ++ini;
-    for (int i=ini; i<end; i+=2) {
-        int idx = (i>>1)-(ini>>1);
-        if (!primes[idx]) {
-            count+=1;
-        }
+    for (int i=0; i<(primes_size-1); i++) {
+        count += 32 - __builtin_popcount(primes[i]);
     }
+    int aux_end = (1<<((n>>1)&31))-1 ;
+    count += __builtin_popcount(aux_end) - __builtin_popcount(primes[n>>6]&(aux_end));
+
     return count;
 }
 
@@ -71,7 +75,7 @@ int main (int argc, char *argv[])
 {
     ll n = 5;
     if(argc >= 2) 
-        n = 2<<(atoi(argv[1])-1);
+        n = 1LLU<<(atoi(argv[1]));
 
     int rank, size;
 
@@ -80,29 +84,29 @@ int main (int argc, char *argv[])
    	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     // PAPI 
-	int EventSet = PAPI_NULL;
-  	long long values[2];
-  	int ret;
-
-	ret = PAPI_library_init( PAPI_VER_CURRENT );
-	if ( ret != PAPI_VER_CURRENT )
-		cout << "FAIL" << endl;
-
-	ret = PAPI_create_eventset(&EventSet);
-	if (ret != PAPI_OK)
-		cout << "ERRO: create eventset" << endl;
-
-	ret = PAPI_add_event(EventSet,PAPI_L1_DCM );
-	if (ret != PAPI_OK)
-		cout << "ERRO: PAPI_L1_DCM" << endl;
-
-	ret = PAPI_add_event(EventSet,PAPI_L2_DCM);
-	if (ret != PAPI_OK)
-		cout << "ERRO: PAPI_L2_DCM" << endl;
-
-	ret = PAPI_start(EventSet);
-	if (ret != PAPI_OK)
-		cout << "ERRO: Start PAPI" << endl;
+//	int EventSet = PAPI_NULL;
+//  	long long values[2];
+//  	int ret;
+//
+//	ret = PAPI_library_init( PAPI_VER_CURRENT );
+//	if ( ret != PAPI_VER_CURRENT )
+//		cout << "FAIL" << endl;
+//
+//	ret = PAPI_create_eventset(&EventSet);
+//	if (ret != PAPI_OK)
+//		cout << "ERRO: create eventset" << endl;
+//
+//	ret = PAPI_add_event(EventSet,PAPI_L1_DCM );
+//	if (ret != PAPI_OK)
+//		cout << "ERRO: PAPI_L1_DCM" << endl;
+//
+//	ret = PAPI_add_event(EventSet,PAPI_L2_DCM);
+//	if (ret != PAPI_OK)
+//		cout << "ERRO: PAPI_L2_DCM" << endl;
+//
+//	ret = PAPI_start(EventSet);
+//	if (ret != PAPI_OK)
+//		cout << "ERRO: Start PAPI" << endl;
     // PAPI
     
     struct timespec start, end;
@@ -117,13 +121,14 @@ int main (int argc, char *argv[])
     ll b_end = b_ini + block_size;
     b_end = b_end > n ? n : b_end;
     ll count = 0;
-    int s = (b_end>>1) - (b_ini>>1); 
-    bool *primes = new bool[s]();
+
+    if(b_ini&1) --b_ini; 
+
+    ll primes_size = ((b_end-b_ini)>>6)+1; 
+    unsigned int *primes = new unsigned int[primes_size]();
     if(b_ini < b_end) {
         rmSmallPrimes(primes, b_ini, b_end, n);
-        sieve(primes, b_ini, b_end);
-        count = countPrimes(primes, s, b_ini, b_end);
-//        cout << "From " << b_ini << " to " << b_end << " got " << count << " primes on rank=" << rank << endl;
+        count += countPrimes(primes, primes_size, b_end-b_ini);
     }
     MPI_Reduce(&count, &total, 1, MPI_LONG_LONG, MPI_SUM, 0, MPI_COMM_WORLD);
     
@@ -138,27 +143,27 @@ int main (int argc, char *argv[])
     delete[] primes;
 
     // PAPI 
-	ret = PAPI_stop(EventSet, values);
-  		if (ret != PAPI_OK) cout << "ERRO: Stop PAPI" << endl;
-
-    printf("\tL1 DCM: %lld \n", values[0]);
-    printf("\tL2 DCM: %lld \n", values[1]);
-
-	ret = PAPI_reset( EventSet );
-	if ( ret != PAPI_OK )
-		cout << "FAIL reset" << endl;
-
-	ret = PAPI_remove_event( EventSet, PAPI_L1_DCM );
-	if ( ret != PAPI_OK )
-		cout << "FAIL remove event" << endl;
-
-	ret = PAPI_remove_event( EventSet, PAPI_L2_DCM );
-	if ( ret != PAPI_OK )
-		cout << "FAIL remove event" << endl;
-
-	ret = PAPI_destroy_eventset( &EventSet );
-	if ( ret != PAPI_OK )
-		cout << "FAIL destroy" << endl;
+//	ret = PAPI_stop(EventSet, values);
+//  		if (ret != PAPI_OK) cout << "ERRO: Stop PAPI" << endl;
+//
+//    printf("\tL1 DCM: %lld \n", values[0]);
+//    printf("\tL2 DCM: %lld \n", values[1]);
+//
+//	ret = PAPI_reset( EventSet );
+//	if ( ret != PAPI_OK )
+//		cout << "FAIL reset" << endl;
+//
+//	ret = PAPI_remove_event( EventSet, PAPI_L1_DCM );
+//	if ( ret != PAPI_OK )
+//		cout << "FAIL remove event" << endl;
+//
+//	ret = PAPI_remove_event( EventSet, PAPI_L2_DCM );
+//	if ( ret != PAPI_OK )
+//		cout << "FAIL remove event" << endl;
+//
+//	ret = PAPI_destroy_eventset( &EventSet );
+//	if ( ret != PAPI_OK )
+//		cout << "FAIL destroy" << endl;
     // PAPI 
 
     MPI_Finalize();

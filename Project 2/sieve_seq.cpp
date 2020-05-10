@@ -2,7 +2,7 @@
 #include <iomanip>
 #include <math.h>
 #include <time.h>
-#include <papi.h>
+//#include <papi.h>
 
 using namespace std;
 
@@ -13,42 +13,42 @@ int main (int argc, char *argv[])
     ll n;
     
     if(argc >= 2) {
-        n = 2<<(atoi(argv[1])-1);
+        n = 1LLU<<(atoi(argv[1]));
     } else {
         cout << "Power of 10: ";
         cin >> n;
-     
         n = pow(10,n);
     }
 
     ll primes_size = (n>>6)+1; 
     unsigned int *primes = new unsigned int[primes_size]();
-  	long long values[2];
-  	int ret;
     
-	ret = PAPI_library_init( PAPI_VER_CURRENT );
-	if ( ret != PAPI_VER_CURRENT )
-		cout << "FAIL" << endl;
-
-	ret = PAPI_create_eventset(&EventSet);
-	if (ret != PAPI_OK)
-		cout << "ERRO: create eventset" << endl;
-
-	ret = PAPI_add_event(EventSet,PAPI_L1_DCM );
-	if (ret != PAPI_OK)
-		cout << "ERRO: PAPI_L1_DCM" << endl;
-
-	ret = PAPI_add_event(EventSet,PAPI_L2_DCM);
-	if (ret != PAPI_OK)
-		cout << "ERRO: PAPI_L2_DCM" << endl;
-
-	ret = PAPI_start(EventSet);
-	if (ret != PAPI_OK)
-		cout << "ERRO: Start PAPI" << endl;
+    // PAPI 
+//	int EventSet = PAPI_NULL;
+//  ll values[2];
+//  int ret;
+//
+//	ret = PAPI_library_init( PAPI_VER_CURRENT );
+//	if ( ret != PAPI_VER_CURRENT )
+//		cout << "FAIL" << endl;
+//
+//	ret = PAPI_create_eventset(&EventSet);
+//	if (ret != PAPI_OK)
+//		cout << "ERRO: create eventset" << endl;
+//
+//	ret = PAPI_add_event(EventSet,PAPI_L1_DCM );
+//	if (ret != PAPI_OK)
+//		cout << "ERRO: PAPI_L1_DCM" << endl;
+//
+//	ret = PAPI_add_event(EventSet,PAPI_L2_DCM);
+//	if (ret != PAPI_OK)
+//		cout << "ERRO: PAPI_L2_DCM" << endl;
+//
+//	ret = PAPI_start(EventSet);
+//	if (ret != PAPI_OK)
+//		cout << "ERRO: Start PAPI" << endl;
     // PAPI
 
-    bool *primes = new bool[n>>1]();
-    
     long long k = 3;
 
     struct timespec start, end;
@@ -84,26 +84,27 @@ int main (int argc, char *argv[])
 
     printf("Loop took %f seconds to execute. Found %llu primes\n", time_spent, count);
 
-    ret = PAPI_stop(EventSet, values);
-    if (ret != PAPI_OK) cout << "ERRO: Stop PAPI" << endl;
-        
-    printf("\tL1 DCM: %lld \n", values[0]);
-    printf("\tL2 DCM: %lld \n", values[1]);
-
-	ret = PAPI_reset( EventSet );
-	if ( ret != PAPI_OK )
-		cout << "FAIL reset" << endl;
-
-	ret = PAPI_remove_event( EventSet, PAPI_L1_DCM );
-	if ( ret != PAPI_OK )
-		cout << "FAIL remove event" << endl;
-
-	ret = PAPI_remove_event( EventSet, PAPI_L2_DCM );
-	if ( ret != PAPI_OK )
-		cout << "FAIL remove event" << endl;
-
-	ret = PAPI_destroy_eventset( &EventSet );
-	if ( ret != PAPI_OK )
-		cout << "FAIL destroy" << endl;
+    // PAPI 
+//	ret = PAPI_stop(EventSet, values);
+//  		if (ret != PAPI_OK) cout << "ERRO: Stop PAPI" << endl;
+//
+//  printf("\tL1 DCM: %lld \n", values[0]);
+//  printf("\tL2 DCM: %lld \n", values[1]);
+//
+//	ret = PAPI_reset( EventSet );
+//	if ( ret != PAPI_OK )
+//		cout << "FAIL reset" << endl;
+//
+//	ret = PAPI_remove_event( EventSet, PAPI_L1_DCM );
+//	if ( ret != PAPI_OK )
+//		cout << "FAIL remove event" << endl;
+//
+//	ret = PAPI_remove_event( EventSet, PAPI_L2_DCM );
+//	if ( ret != PAPI_OK )
+//		cout << "FAIL remove event" << endl;
+//
+//	ret = PAPI_destroy_eventset( &EventSet );
+//	if ( ret != PAPI_OK )
+//		cout << "FAIL destroy" << endl;
     // PAPI 
 }
